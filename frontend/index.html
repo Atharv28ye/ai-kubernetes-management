@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kubernetes AI Troubleshooting Agent</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://db.onlinewebfonts.com/c/8cb707a9b8a73f8a7403336b861c3074?family=BubbledotICG-FinePos" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Video -->
+    <div class="bg">
+        <video class="bg-video" autoplay muted loop playsinline>
+            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4" type="video/mp4" />
+        </video>
+    </div>
+    
+    <!-- Main Page -->
+    <div class="page">
+        <!-- Header -->
+        <header class="header anim" style="--d: 0s">
+            <button class="logo-btn">
+                <img src="assets/logo.webp" alt="" width="52" height="52">
+            </button>
+            
+            <nav class="nav-pill">
+                <a href="#" class="nav-link active">Home</a>
+                <a href="#" class="nav-link">Product</a>
+                <a href="#" class="nav-link">Case Studies</a>
+                <a href="#" class="nav-link">Contact</a>
+            </nav>
+            
+            <button class="sign-in">Sign In</button>
+            
+            <!-- Mobile Burger -->
+            <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </header>
+        
+        <!-- Hero -->
+        <main class="hero">
+            <!-- Trust Row -->
+            <div class="trust-row anim" style="--d: 0.05s">
+                <div class="avatar a1 anim" style="--d: 0.05s">
+                    <i class="fa-brands fa-microsoft"></i>
+                </div>
+                <div class="avatar a2 anim" style="--d: 0.1s">
+                    <i class="fa-brands fa-amazon"></i>
+                </div>
+                <div class="avatar a3 anim" style="--d: 0.15s">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+                <div class="trust-pill anim" style="--d: 0.2s">
+                    Trusted by 2000+ Enterprises
+                </div>
+            </div>
+            
+            <!-- Headline -->
+            <h1 class="headline anim">
+                <span class="anim" style="--d: 0.12s">Kubernetes</span>
+                <span class="anim" style="--d: 0.3s">AI Troubleshooting</span>
+            </h1>
+            
+            <!-- Subhead -->
+            <p class="subhead anim" style="--d: 0.28s">
+                Intelligent Kubernetes troubleshooting that investigates, analyzes, and fixes cluster issues automatically using AI.
+            </p>
+            
+            <!-- CTA -->
+            <button class="cta anim" style="--d: 0.4s" id="getStartedBtn">Get Started</button>
+        </main>
+        
+        <!-- Kubernetes Investigation Section -->
+        <section class="investigation-section" id="investigationSection" style="display: none;">
+            <div class="investigation-container">
+                <!-- Cluster Selector -->
+                <div class="investigation-row">
+                    <label class="investigation-label">Select Cluster:</label>
+                    <select class="investigation-select" id="clusterSelect">
+                        <option value="">Loading clusters...</option>
+                    </select>
+                </div>
+                
+                <!-- Investigate Button -->
+                <button class="investigate-btn" id="investigateBtn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    Investigate Cluster
+                </button>
+                
+                <!-- Progress -->
+                <div class="progress-container" id="progressContainer" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Initializing investigation...</div>
+                </div>
+                
+                <!-- Results -->
+                <div class="results-container" id="resultsContainer" style="display: none;">
+                    <div class="result-card">
+                        <h3><i class="fa-solid fa-bug"></i> Root Cause</h3>
+                        <p id="rootCauseText"></p>
+                    </div>
+                    <div class="result-card">
+                        <h3><i class="fa-solid fa-wrench"></i> Suggested Fix</h3>
+                        <p id="suggestedFixText"></p>
+                    </div>
+                    <div class="result-card">
+                        <h3><i class="fa-solid fa-chart-line"></i> Confidence</h3>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidenceFill"></div>
+                        </div>
+                        <span id="confidenceText"></span>
+                    </div>
+                </div>
+                
+                <!-- History -->
+                <div class="history-container" id="historyContainer" style="display: none;">
+                    <h3><i class="fa-solid fa-clock-rotate-left"></i> Investigation History</h3>
+                    <div class="history-list" id="historyList"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stats Footer -->
+        <footer class="stats anim" style="--d: 0.5s">
+            <div class="stat-item anim" style="--d: 0.5s">
+                <div class="stat-icon"><</div>
+                <div class="stat-value" data-target="30" data-suffix="s" data-decimals="0">0</div>
+                <div class="stat-label">Avg Investigation Time</div>
+            </div>
+            <div class="stat-item anim" style="--d: 0.58s">
+                <div class="stat-icon">%</div>
+                <div class="stat-value" data-target="95" data-suffix="%" data-decimals="0">0</div>
+                <div class="stat-label">Detection Accuracy</div>
+            </div>
+            <div class="stat-item anim" style="--d: 0.66s">
+                <div class="stat-icon">*</div>
+                <div class="stat-value" data-target="24" data-suffix="/7" data-decimals="0">0</div>
+                <div class="stat-label">Monitoring</div>
+            </div>
+            <div class="stat-item anim" style="--d: 0.74s">
+                <div class="stat-icon">#</div>
+                <div class="stat-value" data-target="50" data-suffix="+" data-decimals="0">0</div>
+                <div class="stat-label">Issue Patterns</div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" class="mobile-link anim" style="--d: 0.15s">Home</a>
+        <a href="#" class="mobile-link anim" style="--d: 0.22s">Product</a>
+        <a href="#" class="mobile-link anim" style="--d: 0.29s">Case Studies</a>
+        <a href="#" class="mobile-link anim" style="--d: 0.36s">Contact</a>
+        <button class="mobile-signin anim" style="--d: 0.43s">Sign In</button>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>

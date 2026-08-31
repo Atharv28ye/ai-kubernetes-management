@@ -1,0 +1,376 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================
+   AI KUBERNETES AGENT
+   Soft Pinterest × Retro Editorial Theme
+   ========================================= */
+
+:root {
+  --cream: #fffaf3;
+  --paper: #fffdf9;
+  --pink: #f8dfe7;
+  --pink-dark: #e9b8c9;
+  --lavender: #e7e0f7;
+  --blue: #dcebf7;
+  --yellow: #f8edc8;
+  --green: #dcefe3;
+  --text: #403a42;
+  --muted: #817985;
+  --border: rgba(91, 76, 91, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(248, 223, 231, 0.45),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(231, 224, 247, 0.45),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(220, 235, 247, 0.35),
+      transparent 28%
+    ),
+    var(--cream);
+
+  color: var(--text);
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+/* =========================================
+   BACKGROUND DECORATIONS
+   ========================================= */
+
+.pastel-orb {
+  position: fixed;
+  border-radius: 9999px;
+  filter: blur(1px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb-pink {
+  width: 220px;
+  height: 220px;
+  top: 8%;
+  left: -90px;
+  background: rgba(248, 190, 209, 0.22);
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.orb-lavender {
+  width: 260px;
+  height: 260px;
+  right: -110px;
+  top: 35%;
+  background: rgba(205, 192, 237, 0.22);
+  animation: floatSlow 10s ease-in-out infinite reverse;
+}
+
+.orb-blue {
+  width: 180px;
+  height: 180px;
+  bottom: 5%;
+  left: 45%;
+  background: rgba(182, 218, 239, 0.18);
+  animation: floatSlow 12s ease-in-out infinite;
+}
+
+/* =========================================
+   MAIN CONTENT
+   ========================================= */
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================
+   HERO
+   ========================================= */
+
+.hero {
+  animation: fadeUp 0.8s ease-out both;
+}
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 7px 13px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(91, 76, 91, 0.09);
+
+  color: #8c6d7a;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  box-shadow: 0 8px 25px rgba(93, 75, 93, 0.06);
+}
+
+.hero-title {
+  margin-top: 18px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(42px, 7vw, 72px);
+
+  line-height: 0.98;
+
+  letter-spacing: -0.045em;
+
+  color: #403844;
+}
+
+.hero-title span {
+  color: #bd7d96;
+  font-style: italic;
+}
+
+.hero-subtitle {
+  margin-top: 18px;
+
+  max-width: 600px;
+
+  color: var(--muted);
+
+  font-size: 16px;
+
+  line-height: 1.7;
+}
+
+/* =========================================
+   CARDS
+   ========================================= */
+
+.soft-card {
+  background: rgba(255, 253, 249, 0.76);
+
+  border: 1px solid var(--border);
+
+  border-radius: 26px;
+
+  box-shadow:
+    0 10px 35px rgba(76, 61, 76, 0.06),
+    0 2px 8px rgba(76, 61, 76, 0.035);
+
+  backdrop-filter: blur(12px);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.soft-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 18px 45px rgba(76, 61, 76, 0.10),
+    0 3px 10px rgba(76, 61, 76, 0.05);
+
+  border-color: rgba(189, 125, 150, 0.22);
+}
+
+/* =========================================
+   PASTEL SECTIONS
+   ========================================= */
+
+.pastel-pink {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 239, 244, 0.9),
+    rgba(255, 250, 247, 0.9)
+  );
+}
+
+.pastel-lavender {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 241, 253, 0.9),
+    rgba(255, 252, 249, 0.9)
+  );
+}
+
+.pastel-blue {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 247, 252, 0.9),
+    rgba(255, 252, 249, 0.9)
+  );
+}
+
+.pastel-green {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 249, 242, 0.95),
+    rgba(255, 253, 249, 0.9)
+  );
+}
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.pastel-button {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.pastel-button:hover {
+  transform: translateY(-2px) scale(1.01);
+
+  box-shadow:
+    0 10px 25px rgba(94, 71, 87, 0.12);
+}
+
+.pastel-button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  50% {
+    transform: translateY(-18px) translateX(8px);
+  }
+}
+
+@keyframes pulseSoft {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(8deg) scale(1.15);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.7s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out both;
+}
+
+.animate-float {
+  animation: floatSlow 7s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulseSoft 2.4s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 2.5s ease-in-out infinite;
+}
+
+/* =========================================
+   SCROLLBAR
+   ========================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #decbd3;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c9aab8;
+}
+
+/* =========================================
+   SELECTION
+   ========================================= */
+
+::selection {
+  background: #f1d1dc;
+  color: #403844;
+}

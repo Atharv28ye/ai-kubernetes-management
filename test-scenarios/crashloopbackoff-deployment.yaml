@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-crashloopbackoff
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-crashloopbackoff
+  template:
+    metadata:
+      labels:
+        app: test-crashloopbackoff
+    spec:
+      containers:
+      - name: test-container
+        image: busybox:latest
+        command: ["/bin/sh"]
+        args: ["-c", "echo 'Simulating application startup failure due to missing DATABASE_URL'; exit 1"]
+        # Missing DATABASE_URL environment variable
+        env:
+        # - name: DATABASE_URL
+        #   value: "postgresql://localhost:5432/test"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

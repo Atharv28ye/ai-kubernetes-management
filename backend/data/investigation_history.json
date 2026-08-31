@@ -1,0 +1,85 @@
+[
+  {
+    "id": "inv_1788062356",
+    "cluster": "minikube",
+    "root_cause": "Unable to determine root cause",
+    "explanation": "No explanation provided",
+    "fix": "No fix recommendation provided",
+    "kubectl_commands": [],
+    "confidence": 50,
+    "confidence_reasoning": "No confidence reasoning provided",
+    "prevention": "No prevention recommendations provided",
+    "namespace": "all",
+    "status": "completed",
+    "created_at": "2026-08-30T03:59:42.765126+00:00",
+    "ai_generated": true
+  },
+  {
+    "id": "inv_1788062146",
+    "cluster": "minikube",
+    "root_cause": "Unable to determine root cause",
+    "explanation": "No explanation provided",
+    "fix": "No fix recommendation provided",
+    "kubectl_commands": [],
+    "confidence": 50,
+    "confidence_reasoning": "No confidence reasoning provided",
+    "prevention": "No prevention recommendations provided",
+    "namespace": "all",
+    "status": "completed",
+    "created_at": "2026-08-30T03:56:52.912468+00:00",
+    "ai_generated": true
+  },
+  {
+    "id": "inv_1788062109",
+    "cluster": "minikube",
+    "root_cause": "Unable to determine root cause",
+    "explanation": "No explanation provided",
+    "fix": "No fix recommendation provided",
+    "kubectl_commands": [],
+    "confidence": 50,
+    "confidence_reasoning": "No confidence reasoning provided",
+    "prevention": "No prevention recommendations provided",
+    "namespace": "all",
+    "status": "completed",
+    "created_at": "2026-08-30T03:55:22.123028+00:00",
+    "ai_generated": true
+  },
+  {
+    "id": "inv_1788061374",
+    "cluster": "kind-ai-kuber-kind",
+    "root_cause": "The single worker node is tainted with an untolerated taint, preventing coreDNS and local-path-provisioner pods from being scheduled. This causes readiness probe failures and FailedScheduling events.",
+    "explanation": "All problematic events point to a single node availability issue: '0/1 nodes are available: 1 node(s) had untolerated taint(s)'. The coreDNS pods cannot be scheduled due to the taint, leading to readiness probe failures since they cannot start. The local-path-provisioner is also affected. The 'kubernetes' service having no selector is normal behavior and not a real issue. The root cause is the node taint blocking pod scheduling.",
+    "fix": "1. Remove the untolerated taint from the worker node using kubectl taint nodes --all node-role.kubernetes.io/master-\n2. Alternatively, add tolerations to the coreDNS and local-path-provisioner deployments for the specific taint\n3. If the taint is intentional, ensure all system pods have appropriate tolerations configured",
+    "kubectl_commands": [
+      "kubectl taint nodes --all node-role.kubernetes.io/master-",
+      "kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{'\\t'}{range .spec.taints[*]}{.key}{'='}{.effect}{'\\n'}{end}{end}'",
+      "kubectl describe node <node-name> | grep -A 5 Taints"
+    ],
+    "confidence": 90,
+    "confidence_reasoning": "High confidence due to clear evidence: 3 FailedScheduling events explicitly mention untolerated taints on a single node, and 2 Unhealthy events are directly related to pods that couldn't be scheduled. The correlation between scheduling failures and readiness issues is strong.",
+    "prevention": "- Implement proper taint and toleration configuration for system pods during cluster setup\n- Use node affinity and pod anti-affinity rules instead of relying on taints for workload isolation",
+    "namespace": "all",
+    "status": "completed",
+    "created_at": "2026-08-30T03:43:16.077358+00:00",
+    "ai_generated": true
+  },
+  {
+    "id": "inv_1788011315",
+    "cluster": "minikube",
+    "root_cause": "No actual problem exists. The 'kubernetes' service in the default namespace is the standard Kubernetes API server service which intentionally has no selector - its endpoints are manually managed by the kube-apiserver.",
+    "explanation": "The investigation found all pods, deployments, and DNS are healthy. The flagged 'kubernetes' service is NOT broken - it is the built-in Kubernetes API server service that exists in every cluster. By design, this service has no selector because its endpoints are managed manually by the kube-controller-manager/kube-apiserver to point to the API server endpoints. This is intentional Kubernetes architecture, not a misconfiguration or failure.",
+    "fix": "1. No fix required - this is expected Kubernetes behavior\n2. The 'kubernetes' service endpoints are managed by the system, not by a selector\n3. If you need to verify, check that the API server is accessible: kubectl cluster-info",
+    "kubectl_commands": [
+      "kubectl get svc kubernetes -n default -o yaml",
+      "kubectl get endpoints kubernetes -n default",
+      "kubectl cluster-info"
+    ],
+    "confidence": 95,
+    "confidence_reasoning": "The 'kubernetes' service is a well-known, intentionally designed system service that exists in every Kubernetes cluster. It has no selector by design and uses manually managed endpoints. The investigation confirms all other components are healthy, confirming this is not an issue.",
+    "prevention": "- No action needed - this is standard Kubernetes behavior\n- If you want to monitor service health, focus on custom services with selectors, not system services",
+    "namespace": "all",
+    "status": "completed",
+    "created_at": "2026-08-29T13:48:59.854976+00:00",
+    "ai_generated": true
+  }
+]

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-imagepullbackoff
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-imagepullbackoff
+  template:
+    metadata:
+      labels:
+        app: test-imagepullbackoff
+    spec:
+      containers:
+      - name: test-container
+        # Invalid image repository - this will cause ImagePullBackOff
+        image: nonexistent-registry.invalid/nginx:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

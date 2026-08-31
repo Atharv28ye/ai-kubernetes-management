@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-oomkilled
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-oomkilled
+  template:
+    metadata:
+      labels:
+        app: test-oomkilled
+    spec:
+      containers:
+      - name: test-container
+        image: nginx:latest
+        # This will consume memory and get OOMKilled
+        command: ["/bin/sh"]
+        args: ["-c", "dd if=/dev/zero of=/dev/shm/test bs=1M count=50; sleep 3600"]
+        resources:
+          requests:
+            memory: "16Mi"  # Very low memory limit
+            cpu: "250m"
+          limits:
+            memory: "32Mi"   # Very low memory limit - will cause OOM
+            cpu: "500m"
